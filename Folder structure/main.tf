@@ -11,9 +11,9 @@ resource "aws_instance" "Instance" {
   monitoring = var.monitoring
   associate_public_ip_address = var.associate_public_ips
 
-  tags = {
-    Name = "Terraform"    
-  }
+  tags = merge(var.tags,{
+    Name = "AWS instance"
+  })
 
   root_block_device {   
     volume_size = 10
@@ -30,7 +30,7 @@ resource "aws_security_group" "Security-group" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = [var.cidr_blocks[1]]
+    cidr_blocks = tolist(var.cidr_blocks) //It allows ALL IPs in the list. Security group = rule-based (not order-based)
   }
 
   egress {
@@ -38,10 +38,10 @@ resource "aws_security_group" "Security-group" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [var.cidr_blocks[2]]
+    cidr_blocks = tolist(var.cidr_blocks)
   }
 
-  tags = {
-    Name = "Custome Security group"
-  }
+  tags = merge(var.tags,{
+    Name = "Custom security group"
+  })
 }

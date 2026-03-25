@@ -15,7 +15,7 @@ variable "associate_public_ips" {
 
 variable "cidr_blocks" {
   description = "custom security rule"
-  type = list(string)
+  type = set(string)
 }
 
 variable "instance_type" {
@@ -26,4 +26,9 @@ variable "instance_type" {
 variable "region" {
   description = "Location"
   type = list(string)
+}
+
+variable "tags" {
+  description = "tags"
+  type = map(string)
 }
