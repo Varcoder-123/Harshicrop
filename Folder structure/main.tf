@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.region[0]
 }
 
 resource "aws_instance" "Instance" {
@@ -10,7 +10,6 @@ resource "aws_instance" "Instance" {
   vpc_security_group_ids = ["sg-0c2c1c476b1ffca8a"]
   monitoring = var.monitoring
   associate_public_ip_address = var.associate_public_ips
-  
 
   tags = {
     Name = "Terraform"    

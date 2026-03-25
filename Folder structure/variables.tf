@@ -22,3 +22,8 @@ variable "instance_type" {
   description = "Type of the instance"
   type = list(string)
 }
+
+variable "region" {
+  description = "Location"
+  type = set(string)
+}
