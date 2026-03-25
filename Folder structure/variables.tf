@@ -17,3 +17,8 @@ variable "cidr_blocks" {
   description = "custom security rule"
   type = list(string)
 }
+
+variable "instance_type" {
+  description = "Type of the instance"
+  type = list(string)
+}
