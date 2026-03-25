@@ -25,5 +25,5 @@ variable "instance_type" {
 
 variable "region" {
   description = "Location"
-  type = set(string)
+  type = list(string)
 }
