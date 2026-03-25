@@ -26,7 +26,7 @@ resource "aws_security_group" "Security-group" {
   name = "Custom security group"
   description = "Allow SSH and HTTP"
 
-  ingress = {
+  ingress {
     description = "Allow ssh"
     from_port = 22
     to_port = 22
@@ -34,7 +34,7 @@ resource "aws_security_group" "Security-group" {
     cidr_blocks = var.cidr_blocks[1]
   }
 
-  egress = {
+  egress {
     description = "Allow all outbound"
     from_port   = 0
     to_port     = 0
