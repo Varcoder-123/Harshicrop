@@ -12,3 +12,8 @@ variable "associate_public_ips" {
   description = "public ips"
   type = bool
 }
+
+variable "cidr_blocks" {
+  description = "custom security rule"
+  type = list(string)
+}
