@@ -31,7 +31,7 @@ resource "aws_security_group" "Security-group" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = var.cidr_blocks[1]
+    cidr_blocks = [var.cidr_blocks[1]]
   }
 
   egress {
@@ -39,7 +39,7 @@ resource "aws_security_group" "Security-group" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = var.cidr_blocks[2]
+    cidr_blocks = [var.cidr_blocks[2]]
   }
 
   tags = {
