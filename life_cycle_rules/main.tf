@@ -1,7 +1,7 @@
 resource "aws_instance" "Instance" {
   count              = var.instance_count
   ami                = var.config.ami
-  instance_type      = var.instance_type[3]
+  instance_type      = var.instance_type[0]
   key_name           = var.config.key_name
   vpc_security_group_ids = var.config.vpc_security_group_ids
   monitoring = var.monitoring
