@@ -20,3 +20,14 @@ resource "aws_instance" "Instance" {
    create_before_destroy = true
   }
 }
+
+resource "aws_s3_bucket" "initial-bucket" {
+  count = length(var.bucket_names)
+  bucket = var.bucket_names[count.index]
+
+  tags = var.tags
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}

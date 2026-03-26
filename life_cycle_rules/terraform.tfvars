@@ -15,3 +15,4 @@ config = {
   key_name = "Hashicrop"
   vpc_security_group_ids = ["sg-0c2c1c476b1ffca8a"]
 }
+bucket_names = [ "vicky18672345628", "karthik12034261746", "bhanuprakesh2345233728" ]

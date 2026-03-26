@@ -45,3 +45,8 @@ variable "config" {
     vpc_security_group_ids = set(string)
   })
 }
+
+variable "bucket_names" {
+  description = "List of buckets"
+  type = list(string)
+}
