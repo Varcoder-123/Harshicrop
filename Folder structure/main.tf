@@ -4,10 +4,10 @@ provider "aws" {
 
 resource "aws_instance" "Instance" {
   count              = var.instance_count
-  ami                = var.config[0]
+  ami                = var.config.ami
   instance_type      = var.instance_type[3]
-  key_name           = var.config[1]
-  vpc_security_group_ids = var.config[2]
+  key_name           = var.config.key_name
+  vpc_security_group_ids = var.config.vpc_security_group_ids
   monitoring = var.monitoring
   associate_public_ip_address = var.associate_public_ips
 
