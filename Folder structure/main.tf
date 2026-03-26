@@ -4,10 +4,10 @@ provider "aws" {
 
 resource "aws_instance" "Instance" {
   count              = var.instance_count
-  ami                = "ami-02dfbd4ff395f2a1b"
+  ami                = var.config[0]
   instance_type      = var.instance_type[3]
-  key_name           = "Hashicrop"
-  vpc_security_group_ids = ["sg-0c2c1c476b1ffca8a"]
+  key_name           = var.config[1]
+  vpc_security_group_ids = var.config[2]
   monitoring = var.monitoring
   associate_public_ip_address = var.associate_public_ips
 
@@ -27,9 +27,9 @@ resource "aws_security_group" "Security-group" {
 
   ingress {
     description = "Allow ssh"
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
+    from_port = var.ingress[0]
+    to_port = var.ingress[1]
+    protocol = var.ingress[2]
     cidr_blocks = tolist(var.cidr_blocks) //It allows ALL IPs in the list. Security group = rule-based (not order-based)
   }
 

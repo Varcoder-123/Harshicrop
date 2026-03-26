@@ -32,3 +32,16 @@ variable "tags" {
   description = "tags"
   type = map(string)
 }
+
+variable "ingress" {
+  description = "ingress value"
+  type = tuple([number,number,string])
+}
+
+variable "config" {
+  type = object({
+    ami = string,
+    key_name = string,
+    vpc_security_group_ids = set(string)
+  })
+}
