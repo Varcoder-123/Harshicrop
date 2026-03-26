@@ -14,4 +14,5 @@ resource "aws_s3_bucket" "second-bucket" {
   bucket = each.value
 
   tags = var.tags
+  depends_on = [ aws_s3_bucket.initial-bucket ]
 }
