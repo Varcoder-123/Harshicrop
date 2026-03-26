@@ -11,7 +11,7 @@ tags = {
 }
 ingress = [ 12, 23, "tcp" ]
 config = {
-  ami = "ami-02dfbd4ff395f2a1b"
+  ami = "ami-0c421724a94bba6d6"
   key_name = "Hashicrop"
   vpc_security_group_ids = ["sg-0c2c1c476b1ffca8a"]
 }
