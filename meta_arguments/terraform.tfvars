@@ -1,5 +1,5 @@
 region = ["us-east-1","us-east-2","us-east-3"]
-bucket_names = [ "Vicky1867", "Karthik12034", "Bhanuprakesh234523" ]
+bucket_names = [ "vicky18672345628", "karthik12034261746", "bhanuprakesh2345233728" ]
 tags = {
   Environment = "dev"
   Project     = "ecommerce"
