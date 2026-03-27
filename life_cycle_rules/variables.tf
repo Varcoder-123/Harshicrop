@@ -53,10 +53,10 @@ variable "bucket_names" {
 
 variable "template" {
   type = object({
-    name = string,
-    image = string,
-    instance-type = string,
-    key-name = string,
-    vpc =  set(string),
+    name_prefix = string,
+    image_id = string,
+    instance_type = string,
+    key_name = string,
+    vpc_security_group_ids = set(string)
   })
 }

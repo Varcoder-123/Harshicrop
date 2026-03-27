@@ -33,8 +33,9 @@ resource "aws_s3_bucket" "initial-bucket" {
 }
 
 resource "aws_launch_template" "template" {
- name_prefix = var.template.name
- image_id = var.template.image
- instance_type = var.template.instance-type
- key_name = var.template.key-name
+ name_prefix = var.template.name_prefix
+ image_id = var.template.image_id
+ instance_type = var.template.instance_type
+ key_name = var.template.key_name
+ vpc_security_group_ids = [  ]
 }
