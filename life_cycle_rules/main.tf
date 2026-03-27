@@ -43,7 +43,7 @@ resource "aws_launch_template" "template" {
  key_name = var.template.key_name
  vpc_security_group_ids = var.template.vpc_security_group_ids
  tag_specifications {
-   resource_type = "Auto-scaling"
+   resource_type = "instance"
    tags = var.tags
  }
 }
