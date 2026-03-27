@@ -19,7 +19,7 @@ bucket_names = [ "vicky18672345628", "karthik12034261746", "bhanuprakesh23452337
 template = {
   name_prefix = "Harshicrop-terraform"
   image_id = "ami-0ec10929233384c7f"
-  instance_type = "t2.micro"
+  instance_type = "t3.medium"
   key_name = "Hashicrop"
   vpc_security_group_ids = [ "sg-0c2c1c476b1ffca8a" ]
 }
