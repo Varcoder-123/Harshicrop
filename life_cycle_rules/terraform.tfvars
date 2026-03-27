@@ -16,3 +16,9 @@ config = {
   vpc_security_group_ids = ["sg-0c2c1c476b1ffca8a"]
 }
 bucket_names = [ "vicky18672345628", "karthik12034261746", "bhanuprakesh2345233728" ]
+template = {
+  name = "Harshicrop-terraform"
+  image = "ami-0ec10929233384c7f"
+  instance-type = "t2.micro"
+  key-name = "Hashicrop"
+}

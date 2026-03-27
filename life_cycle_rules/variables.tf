@@ -50,3 +50,13 @@ variable "bucket_names" {
   description = "List of buckets"
   type = list(string)
 }
+
+variable "template" {
+  type = object({
+    name = string,
+    image = string,
+    instance-type = string,
+    key-name = string,
+    vpc =  set(string),
+  })
+}
