@@ -64,6 +64,8 @@ resource "aws_autoscaling_group" "autoscaling" {
     version = "$Latest"
   }
 
+  availability_zones = [ "us-east-1a" ]
+
  tag {
    key                 = "Environment"
    value               = "dev"
