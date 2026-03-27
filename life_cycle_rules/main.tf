@@ -41,9 +41,32 @@ resource "aws_launch_template" "template" {
  image_id = var.template.image_id
  instance_type = var.template.instance_type
  key_name = var.template.key_name
+ 
  vpc_security_group_ids = var.template.vpc_security_group_ids
+ 
+ tags = merge(var.tags,{
+    Name = "launch-template"
+  })
+
  tag_specifications {
    resource_type = "instance"
    tags = var.tags
+ }
+}
+
+resource "aws_autoscaling_group" "autoscaling" {
+  desired_capacity = var.autoscaling.desired_capacity
+  min_size = var.autoscaling.min_size
+  max_size = var.autoscaling.max_size
+
+  launch_template {
+    id = aws_launch_template.template.id
+    version = "Latest"
+  }
+
+ tag {
+   key                 = "Environment"
+   value               = "dev"
+   propagate_at_launch = true
  }
 }

@@ -23,4 +23,9 @@ template = {
   key_name = "Hashicrop"
   vpc_security_group_ids = [ "sg-0c2c1c476b1ffca8a" ]
 }
+autoscaling = {
+  desired_capacity = 2
+  max_size = 3
+  min_size = 1
+}
 

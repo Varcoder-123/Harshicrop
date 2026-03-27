@@ -60,3 +60,11 @@ variable "template" {
     vpc_security_group_ids = set(string)
   })
 }
+
+variable "autoscaling" {
+  type = object({
+    desired_capacity = number,
+    max_size = number,
+    min_size = number,
+  })
+}
