@@ -49,8 +49,8 @@ resource "aws_launch_template" "template" {
   })
 
  tag_specifications {
-   resource_type = "instance"
-   tags = var.tags
+   resource_type = "instance" ##It tells AWS → WHICH resource to apply tags to
+   tags = var.tags ##tags are applied to EC2 instances created USING THE LAUNCH TEMPLATE 
  }
 }
 
@@ -66,9 +66,13 @@ resource "aws_autoscaling_group" "autoscaling" {
 
   availability_zones = [ "us-east-1a" ]
 
- tag {
-   key                 = "Environment"
-   value               = "dev"
-   propagate_at_launch = true
- }
+  tag {
+    key                 = "Environment" ##✔ Tag applied to ASG
+    value               = "dev" ##✔ Tag ALSO applied to EC2 instances created by ASG. When propagate_at_launch = false ✔ Tag applied ONLY to ASG 
+    propagate_at_launch = true
+  }
+
+  lifecycle {
+    ignore_changes = [desired_capacity]
+  }
 }
