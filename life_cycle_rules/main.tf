@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region[0]
+}
+
 resource "aws_instance" "Instance" {
   count              = var.instance_count
   ami                = var.config.ami
