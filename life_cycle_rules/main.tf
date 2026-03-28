@@ -125,7 +125,7 @@ resource "aws_s3_bucket" "initial-bucket" {
   tags = var.tags
 
   versioning {
-    enabled = true
+    enabled = false
   }
 
   lifecycle {
