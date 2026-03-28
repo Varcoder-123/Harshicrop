@@ -136,20 +136,20 @@ resource "aws_instance" "Instance" {
 #   }
 # }
 
-resource "aws_s3_bucket" "initial-bucket" {
-  count = length(var.bucket_names)
-  bucket = var.bucket_names[count.index]
+# resource "aws_s3_bucket" "initial-bucket" {
+#   count = length(var.bucket_names)
+#   bucket = var.bucket_names[count.index]
 
-  tags = var.tags
+#   tags = var.tags
 
-  versioning {
-    enabled = false
-  }
+#   versioning {
+#     enabled = false
+#   }
 
-  lifecycle {
-    precondition {
-      condition = can(regex("^mycompany-dev-.*$", var.bucket_names[count.index]))
-      error_message = "Bucket name must start with 'mycompany-dev-'"
-    }
-  }
-}
+#   lifecycle {
+#     precondition {
+#       condition = can(regex("^mycompany-dev-.*$", var.bucket_names[count.index]))
+#       error_message = "Bucket name must start with 'mycompany-dev-'"
+#     }
+#   }
+# }
