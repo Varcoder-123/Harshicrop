@@ -118,6 +118,24 @@ provider "aws" {
 #   }
 # }
 
+# resource "aws_s3_bucket" "initial-bucket" {
+#   count = length(var.bucket_names)
+#   bucket = var.bucket_names[count.index]
+
+#   tags = var.tags
+
+#   versioning {
+#     enabled = false
+#   }
+
+#   lifecycle {
+#     postcondition {
+#       condition = self.versioning[0].enabled == true
+#       error_message = "S3 bucket versioning is NOT enabled!"
+#     }
+#   }
+# }
+
 resource "aws_s3_bucket" "initial-bucket" {
   count = length(var.bucket_names)
   bucket = var.bucket_names[count.index]
@@ -125,13 +143,13 @@ resource "aws_s3_bucket" "initial-bucket" {
   tags = var.tags
 
   versioning {
-    enabled = true
+    enabled = false
   }
 
   lifecycle {
-    postcondition {
-      condition = self.versioning[0].enabled == true
-      error_message = "S3 bucket versioning is NOT enabled!"
+    precondition {
+      condition = can(regex("^mycompany-dev-.*$", var.bucket_names[count.index]))
+      error_message = "Bucket name must start with 'mycompany-dev-'"
     }
   }
 }
