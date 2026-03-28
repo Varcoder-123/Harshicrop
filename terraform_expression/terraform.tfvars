@@ -28,4 +28,17 @@ autoscaling = {
   max_size = 3
   min_size = 1
 }
+ingress_rules = [ 
+{
+  from_port = 12
+  to_port = 23
+  protocol = "tcp"
+  cidr_blocks = ["172.31.0.0/20"]
+},
+{
+  from_port = 24
+  to_port = 22
+  protocol = "udp"
+  cidr_blocks = ["172.31.64.0/20"]
+} ]
 

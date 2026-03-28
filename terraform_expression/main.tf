@@ -25,6 +25,33 @@ resource "aws_instance" "Instance" {
   }
 }
 
+resource "aws_security_group" "Security-group" {
+  name = "Custom security group"
+  description = "Allow SSH and HTTP"
+
+  dynamic ingress {
+    for_each = var.ingress_rules
+    content {
+      from_port = ingress.value.from_port
+      to_port = ingress.value.to_port
+      protocol = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+
+  egress {
+    description = "Allow all outbound"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = tolist(var.cidr_blocks)
+  }
+
+  tags = merge(var.tags,{
+    Name = "Custom security group"
+  })
+}
+
 # resource "aws_s3_bucket" "initial-bucket" {
 #   count = length(var.bucket_names)
 #   bucket = var.bucket_names[count.index]
