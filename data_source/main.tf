@@ -16,11 +16,26 @@ data "aws_subnet" "shared" {
     values = [data.aws_vpc.default_vpc.id]
   }
 }
+
+data "aws_ami" "ami_image" {
+  owners = [ "amazon" ]
+  most_recent = true
+
+  filter {
+    name = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+
+  filter {
+    name = "state"
+    values = ["available"]
+  }
+}
 resource "aws_instance" "Instance" {
-  count              = var.instance_count
-  ami                = var.config.ami
+  ami                = data.aws_ami.ami_image.id
   instance_type      = var.tags.Environment == "dev" ? "t2.micro" : "t3.micro" #conditional expression
   key_name           = var.config.key_name
+  subnet_id = data.aws_subnet.shared.id
   vpc_security_group_ids = var.config.vpc_security_group_ids
   monitoring = var.monitoring
   associate_public_ip_address = var.associate_public_ips
