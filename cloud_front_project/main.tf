@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "bucket" { # By default s3 bucket will be private
   bucket = var.bucket_name
 }
 
-resource "aws_cloudfront_origin_access_control" "origin_access_control" { # origin access control act as an authentication layer between cloudfront and s3 bucket
+resource "aws_cloudfront_origin_access_control" "oac" { # origin access control act as an authentication layer between cloudfront and s3 bucket
   name = var.origin_access_control
   description = "Example policy"
   origin_access_control_origin_type = "s3"
@@ -52,6 +52,43 @@ resource "aws_s3_object" "object" { # Uploading the files to bucket
     element(split(".",each.value), length(split(".",each.value)) - 1),
     "application/octet-stream" #Used if extension not found
   )
+}
+
+resource "aws_cloudfront_distribution" "name" { # Cloud front 
+   enabled             = true
+   default_root_object = "index.html" #When user hits https://your-domain/ CloudFront serves: indec.html
+  
+  origin { #origin where content is stored
+    domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name #Cloud front will fetch content from s3
+    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id #secure access to s3
+    origin_id = "s3-origin"
+  }
+
+  default_cache_behavior {
+    target_origin_id       = "s3-origin" #Connects to origin block
+    viewer_protocol_policy = "redirect-to-https" #HTTP → automatically redirect to HTTPS
+
+    allowed_methods = ["GET", "HEAD"] 
+    cached_methods  = ["GET", "HEAD"] # read request allowed
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
+  }
+
+ viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
 }
 
 
