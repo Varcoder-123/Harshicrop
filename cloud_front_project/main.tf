@@ -19,12 +19,18 @@ resource "aws_s3_bucket_policy" "allow_cloud_front_policy" { # This policy is at
       "Sid": "Statement1",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "cloudfront.amazonaws.com"
+        "Service": "cloudfront.amazonaws.com"
       },
       "Action": [
         "s3:GetObject"
       ],
       "Resource": "arn:aws:s3:::vicky1867123/*"
+
+      Condition = {
+        StringEquals = {
+          "AWS:SourceArn" = aws_cloudfront_distribution.s3_dis.arn #Allow ONLY this specific CloudFront distribution to access S3
+        }
+      }
     }
   ]
 })
@@ -54,7 +60,7 @@ resource "aws_s3_object" "object" { # Uploading the files to bucket
   )
 }
 
-resource "aws_cloudfront_distribution" "name" { # Cloud front 
+resource "aws_cloudfront_distribution" "s3_dis" { # Cloud front 
    enabled             = true
    default_root_object = "index.html" #When user hits https://your-domain/ CloudFront serves: indec.html
   
