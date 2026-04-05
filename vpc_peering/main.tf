@@ -121,13 +121,13 @@ resource "aws_security_group" "secondary_sg" {
 resource "aws_key_pair" "primary_key" {
   provider = aws.primary
   key_name = "Hashicrop"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file("vpc_peering.pub")
 }
 
 resource "aws_key_pair" "secondary_key" {
   provider = aws.secondary
   key_name = "Hashicrop"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file("vpc_peering.pub")
 }
 
 resource "aws_instance" "primary_instance" {
