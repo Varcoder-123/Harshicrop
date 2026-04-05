@@ -118,17 +118,7 @@ resource "aws_security_group" "secondary_sg" {
   }
 }
 
-resource "aws_key_pair" "primary_key" {
-  provider = aws.primary
-  key_name = "Hashicrop"
-  public_key = file("vpc_peering.pub")
-}
 
-resource "aws_key_pair" "secondary_key" {
-  provider = aws.secondary
-  key_name = "Hashicrop"
-  public_key = file("vpc_peering.pub")
-}
 
 resource "aws_instance" "primary_instance" {
   provider = aws.primary
@@ -136,7 +126,7 @@ resource "aws_instance" "primary_instance" {
   instance_type = "t2.micro"
   subnet_id = aws_subnet.primary_subnet.id
   vpc_security_group_ids = [ aws_security_group.primary_sg.id ]
-  key_name = aws_key_pair.primary_key.key_name
+  key_name = "Hashicrop"
 }
 
 resource "aws_instance" "secondary_instance" {
@@ -145,5 +135,5 @@ resource "aws_instance" "secondary_instance" {
   instance_type = "t2.micro"
   subnet_id = aws_subnet.secondary_subnet.id
   vpc_security_group_ids = [ aws_security_group.secondary_sg.id ]
-  key_name = aws_key_pair.secondary_key.key_name
+  key_name = "Hashicrop"
 }
