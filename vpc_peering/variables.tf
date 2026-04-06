@@ -21,3 +21,7 @@ variable "primary_cidr_subnet" {
 variable "secondary_cidr_subnet" {
   type = string
 }
+
+variable "key_name" {
+  type = string
+}
